@@ -32,5 +32,46 @@ public class DispatchDAO
         }
     }
 
+    public boolean addwork(DispatchList s)
+    {
+        dispatchLists.add(s);
+        return true;
+    }
+
+    public ArrayList<DispatchList> getworklist()
+    {
+        return dispatchLists;
+    }
+
+    public DispatchList get(int id)
+    {
+        for(DispatchList d:dispatchLists)
+        {
+            if(d.id == id)
+            {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    public DispatchList get(String name)
+    {
+        for(DispatchList d:dispatchLists)
+        {
+            if(d.driver == name)
+            {
+                return d;
+            }
+            else if(d.apprentice == name)
+            {
+                return d;
+            }
+        }
+        return null;
+    }
+
+
+
 
 }
