@@ -21,7 +21,8 @@
         <activity
             android:name=".EmployerActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".DispatchActivity"></activity>
+        <activity android:name=".DispatchActivity" />
+        <activity android:name=".DatepickActivity"></activity>
     </application>
 
 </manifest>
