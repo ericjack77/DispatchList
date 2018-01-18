@@ -12,4 +12,25 @@ public class DispatchDAO
     public ArrayList<Employee> employeeList;
     public ArrayList<DispatchList> dispatchLists;
     public ArrayList<WorkState> workstateList;
+
+    public DispatchDAO(String ob)
+    {
+        switch (ob)
+        {
+            case "dispatchLists":
+                dispatchLists = new ArrayList<>();
+                break;
+            case "workstateList":
+                workstateList = new ArrayList<>();
+                break;
+            case "Crane":
+                cranelist = new ArrayList<>();
+                break;
+            case "employeeList":
+                employeeList = new ArrayList<>();
+                break;
+        }
+    }
+
+
 }
