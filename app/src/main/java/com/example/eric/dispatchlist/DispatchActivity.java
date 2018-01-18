@@ -30,6 +30,11 @@ public class DispatchActivity extends AppCompatActivity {
         }
     }
 
+    public void clickLocation(View v)
+    {
+
+    }
+
     public void clickTime(View v)
     {
         Intent it =new Intent(DispatchActivity.this,DatepickActivity.class);
