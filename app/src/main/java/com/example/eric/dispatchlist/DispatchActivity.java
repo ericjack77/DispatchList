@@ -9,12 +9,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.eric.dispatchlist.DAOdata.DispatchDAO;
 import com.example.eric.dispatchlist.DAOdata.DispatchList;
 
 public class DispatchActivity extends AppCompatActivity {
     TextView tvtime,tvlocation,tvdriver;
     final int time=999,location=998;
     int ch,tmp=-1;
+    public static DispatchDAO dispatchdao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +25,7 @@ public class DispatchActivity extends AppCompatActivity {
         tvtime =findViewById(R.id.tvtime);
         tvlocation = findViewById(R.id.tvlocation);
         tvdriver = findViewById(R.id.tvdriver);
-
+        dispatchdao = new DispatchDAO("dispatchLists");
 
     }
 
@@ -47,6 +50,7 @@ public class DispatchActivity extends AppCompatActivity {
         dia.setTitle("司機列表");
         final String fruits[]={"Apple","Pineapple","Tomato"};
         tmp=ch;
+
         dia.setSingleChoiceItems(fruits, ch, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -57,13 +61,13 @@ public class DispatchActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 ch=tmp;
-                tv3.setText(fruits[ch]);
+                tvdriver.setText(fruits[ch]);
             }
         });
         dia.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                tv3.setText("");
+                tvdriver.setText("司機");
             }
         });
 
