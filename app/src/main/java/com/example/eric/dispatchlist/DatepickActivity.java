@@ -22,7 +22,7 @@ public class DatepickActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void clickSubmit(View v)
+    public void clickSubmitTime(View v)
     {
         int year = dp.getYear();
         int month = dp.getMonth()+1;
@@ -31,12 +31,13 @@ public class DatepickActivity extends AppCompatActivity {
         int min =tp.getMinute();
         String gettime = year + "/" + month + "/" + day+"("+hour+":"+min+")";
         Intent i=new Intent();
-//        Bundle b=new Bundle();
-//        b.putString("B", "I am B");
-//        i.putExtras(b);
         i.putExtra("time",gettime);
         setResult(RESULT_OK,i);
         finish();
+
+        //        Bundle b=new Bundle();
+//        b.putString("B", "I am B");
+//        i.putExtras(b);
 
     }
 }

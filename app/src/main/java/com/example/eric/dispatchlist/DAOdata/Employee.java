@@ -11,8 +11,6 @@ public class Employee
     public String position;
     public String tel;
 
-    public String idnumber;
-    public String birth;
 
     public String username;
     public String password;

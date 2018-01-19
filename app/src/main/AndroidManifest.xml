@@ -22,7 +22,8 @@
             android:name=".EmployerActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".DispatchActivity" />
-        <activity android:name=".DatepickActivity"></activity>
+        <activity android:name=".DatepickActivity" />
+        <activity android:name=".LocationActivity" />
     </application>
 
 </manifest>

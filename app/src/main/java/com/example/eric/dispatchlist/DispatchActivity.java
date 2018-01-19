@@ -6,18 +6,23 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.eric.dispatchlist.DAOdata.DispatchList;
 
 public class DispatchActivity extends AppCompatActivity {
-    TextView tvtime;
-    final int time=999;
+    TextView tvtime,tvlocation,tvdriver;
+    final int time=999,location=998;
+    int ch,tmp=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dispatch);
-        tvtime =findViewById(R.id.textView7);
+        tvtime =findViewById(R.id.tvtime);
+        tvlocation = findViewById(R.id.tvlocation);
+        tvdriver = findViewById(R.id.tvdriver);
+
 
     }
 
@@ -27,18 +32,54 @@ public class DispatchActivity extends AppCompatActivity {
         switch(requestCode){
             case time:
                 tvtime.setText(data.getStringExtra("time"));
+                break;
+            case location:
+                tvlocation.setText(data.getStringExtra("location"));
+                break;
+
         }
     }
 
-    public void clickLocation(View v)
-    {
 
+    public void clickDriver(View v)
+    {
+        AlertDialog.Builder dia=new AlertDialog.Builder(DispatchActivity.this);
+        dia.setTitle("司機列表");
+        final String fruits[]={"Apple","Pineapple","Tomato"};
+        tmp=ch;
+        dia.setSingleChoiceItems(fruits, ch, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                tmp=i;
+            }
+        });
+        dia.setPositiveButton("送出", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                ch=tmp;
+                tv3.setText(fruits[ch]);
+            }
+        });
+        dia.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                tv3.setText("");
+            }
+        });
+
+        dia.show();
     }
 
     public void clickTime(View v)
     {
         Intent it =new Intent(DispatchActivity.this,DatepickActivity.class);
         startActivityForResult(it,time);
+    }
+
+    public  void clickLocation(View v)
+    {
+        Intent it =new Intent(DispatchActivity.this,LocationActivity.class);
+        startActivityForResult(it,location);
     }
 
     public void clickSubmit(View v)
@@ -58,5 +99,6 @@ public class DispatchActivity extends AppCompatActivity {
 
             }
         });
+        builder.show();
     }
 }
