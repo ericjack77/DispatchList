@@ -5,12 +5,16 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.eric.dispatchlist.DAOdata.DispatchDAO;
 import com.example.eric.dispatchlist.DAOdata.DispatchList;
+import com.example.eric.dispatchlist.DAOdata.Employee;
+
+import java.util.ArrayList;
 
 public class DispatchActivity extends AppCompatActivity {
     TextView tvtime,tvlocation,tvdriver;
@@ -48,10 +52,24 @@ public class DispatchActivity extends AppCompatActivity {
     {
         AlertDialog.Builder dia=new AlertDialog.Builder(DispatchActivity.this);
         dia.setTitle("司機列表");
-        final String fruits[]={"Apple","Pineapple","Tomato"};
+
+        final ArrayList<String> driverlist =new ArrayList<>();
+
+        for(Employee c: MainActivity.dao.employeeList)
+        {
+            Log.d("array",c.id+"號,姓名:"+c.name+",職位:"+c.position);
+            if(c.position.equals("司機"))
+            {
+                driverlist.add(c.name);
+                Log.d("driverlist",driverlist.toString());
+            }
+        }
+
+        final String driver[] = (String[]) driverlist.toArray(new String[0]);
+
         tmp=ch;
 
-        dia.setSingleChoiceItems(fruits, ch, new DialogInterface.OnClickListener() {
+        dia.setSingleChoiceItems(driver, ch, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 tmp=i;
@@ -61,7 +79,7 @@ public class DispatchActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 ch=tmp;
-                tvdriver.setText(fruits[ch]);
+                tvdriver.setText(driver[ch]);
             }
         });
         dia.setNegativeButton("取消", new DialogInterface.OnClickListener() {
