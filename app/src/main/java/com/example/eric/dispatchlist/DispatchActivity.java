@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.eric.dispatchlist.DAOdata.Crane;
 import com.example.eric.dispatchlist.DAOdata.DispatchDAO;
 import com.example.eric.dispatchlist.DAOdata.DispatchList;
 import com.example.eric.dispatchlist.DAOdata.Employee;
@@ -17,7 +18,7 @@ import com.example.eric.dispatchlist.DAOdata.Employee;
 import java.util.ArrayList;
 
 public class DispatchActivity extends AppCompatActivity {
-    TextView tvtime,tvlocation,tvdriver;
+    TextView tvtime,tvlocation,tvdriver,tvapprentice,tvcar,tvconsumer,tvcontel,tvnote;
     final int time=999,location=998;
     int ch,tmp=-1;
     public static DispatchDAO dispatchdao;
@@ -29,6 +30,11 @@ public class DispatchActivity extends AppCompatActivity {
         tvtime =findViewById(R.id.tvtime);
         tvlocation = findViewById(R.id.tvlocation);
         tvdriver = findViewById(R.id.tvdriver);
+        tvapprentice =findViewById(R.id.tvapprentice);
+        tvcar = findViewById(R.id.tvcar);
+        tvconsumer =findViewById(R.id.tvconsumer);
+        tvcontel =findViewById(R.id.tvcontel);
+        tvnote = findViewById(R.id.tvnote);
         dispatchdao = new DispatchDAO("dispatchLists");
 
     }
@@ -43,6 +49,16 @@ public class DispatchActivity extends AppCompatActivity {
             case location:
                 tvlocation.setText(data.getStringExtra("location"));
                 break;
+//            case consumer:
+//                tvconsumer.setText(data.getStringExtra("location"));
+//                break;
+//            case contel:
+//                tvcontel.setText(data.getStringExtra("location"));
+//                break;
+//            case note:
+//                tvnote.setText(data.getStringExtra("location"));
+//                break;
+
 
         }
     }
@@ -92,6 +108,93 @@ public class DispatchActivity extends AppCompatActivity {
         dia.show();
     }
 
+    public void clickApprentice(View v)
+    {
+        AlertDialog.Builder dia=new AlertDialog.Builder(DispatchActivity.this);
+        dia.setTitle("助手列表");
+
+        final ArrayList<String> apprelist =new ArrayList<>();
+
+        for(Employee c: MainActivity.dao.employeeList)
+        {
+            Log.d("array",c.id+"號,姓名:"+c.name+",職位:"+c.position);
+            if(c.position.equals("助手"))
+            {
+                apprelist.add(c.name);
+                Log.d("driverlist",apprelist.toString());
+            }
+        }
+
+        final String driver[] = (String[]) apprelist.toArray(new String[0]);
+
+        tmp=ch;
+
+        dia.setSingleChoiceItems(driver, ch, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                tmp=i;
+            }
+        });
+        dia.setPositiveButton("送出", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                ch=tmp;
+                tvapprentice.setText(driver[ch]);
+            }
+        });
+        dia.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                tvapprentice.setText("助手");
+            }
+        });
+
+        dia.show();
+    }
+
+    public void clickCar(View v)
+    {
+        AlertDialog.Builder dia=new AlertDialog.Builder(DispatchActivity.this);
+        dia.setTitle("車子列表");
+
+        final ArrayList<String> carlist =new ArrayList<>();
+
+        for(Crane c: MainActivity.dao.cranelist)
+        {
+            Log.d("array",c.id+"號,姓名:"+c.name+","+c.maxLift);
+
+            carlist.add("噸數:"+c.maxLift+"車牌:"+c.name);
+            Log.d("driverlist",carlist.toString());
+
+        }
+
+        final String driver[] = (String[]) carlist.toArray(new String[0]);
+
+        tmp=ch;
+
+        dia.setSingleChoiceItems(driver, ch, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                tmp=i;
+            }
+        });
+        dia.setPositiveButton("送出", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                ch=tmp;
+                tvcar.setText(driver[ch]);
+            }
+        });
+        dia.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                tvcar.setText("車種");
+            }
+        });
+
+        dia.show();
+    }
+
     public void clickTime(View v)
     {
         Intent it =new Intent(DispatchActivity.this,DatepickActivity.class);
@@ -103,6 +206,24 @@ public class DispatchActivity extends AppCompatActivity {
         Intent it =new Intent(DispatchActivity.this,LocationActivity.class);
         startActivityForResult(it,location);
     }
+
+//    public  void clickConsumer(View v)
+//    {
+//        Intent it =new Intent(DispatchActivity.this,LocationActivity.class);
+//        startActivityForResult(it,consumer);
+//    }
+//
+//    public  void clickContel(View v)
+//    {
+//        Intent it =new Intent(DispatchActivity.this,LocationActivity.class);
+//        startActivityForResult(it,contel);
+//    }
+//
+//    public  void clickNote(View v)
+//    {
+//        Intent it =new Intent(DispatchActivity.this,LocationActivity.class);
+//        startActivityForResult(it,note);
+//    }
 
     public void clickSubmit(View v)
     {

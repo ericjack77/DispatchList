@@ -29,7 +29,7 @@ public class DatepickActivity extends AppCompatActivity {
         int day = dp.getDayOfMonth();
         int hour=tp.getHour();
         int min =tp.getMinute();
-        String gettime = year + "/" + month + "/" + day+"("+hour+":"+min+")";
+        String gettime = year + "/" + month + "/" + day+" "+hour+":"+min;
         Intent i=new Intent();
         i.putExtra("time",gettime);
         setResult(RESULT_OK,i);

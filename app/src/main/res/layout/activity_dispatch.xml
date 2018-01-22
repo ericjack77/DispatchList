@@ -65,7 +65,6 @@
                 android:id="@+id/tvtime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="8sp"
                 android:onClick="clickTime"
                 android:text="時間"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -90,39 +89,46 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tvcar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="clickCar"
                 android:text="車種"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/tvapprentice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="clickApprentice"
                 android:text="助手"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvconsumer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="clickConsumer"
                 android:text="聯絡人"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/tvcontel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="clickContel"
                 android:text="聯絡人電話"
                 android:textSize="34sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvnote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="clickNote"
                 android:text="備註"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
         </LinearLayout>
