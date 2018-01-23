@@ -19,9 +19,10 @@ import java.util.ArrayList;
 
 public class DispatchActivity extends AppCompatActivity {
     TextView tvtime,tvlocation,tvdriver,tvapprentice,tvcar,tvconsumer,tvcontel,tvnote;
-    final int time=999,location=998;
+    final int time=999,location=998,consumer=997,contel=996,note=995;
     int ch,tmp=-1;
     public static DispatchDAO dispatchdao;
+    public static boolean bloc=false,bconsumer=false,bcontel=false,bnote=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +50,15 @@ public class DispatchActivity extends AppCompatActivity {
             case location:
                 tvlocation.setText(data.getStringExtra("location"));
                 break;
-//            case consumer:
-//                tvconsumer.setText(data.getStringExtra("location"));
-//                break;
-//            case contel:
-//                tvcontel.setText(data.getStringExtra("location"));
-//                break;
-//            case note:
-//                tvnote.setText(data.getStringExtra("location"));
-//                break;
+            case consumer:
+                tvconsumer.setText(data.getStringExtra("consumer"));
+                break;
+            case contel:
+                tvcontel.setText(data.getStringExtra("contel"));
+                break;
+            case note:
+                tvnote.setText(data.getStringExtra("note"));
+                break;
 
 
         }
@@ -204,26 +205,30 @@ public class DispatchActivity extends AppCompatActivity {
     public  void clickLocation(View v)
     {
         Intent it =new Intent(DispatchActivity.this,LocationActivity.class);
+        bloc=true;
         startActivityForResult(it,location);
     }
 
-//    public  void clickConsumer(View v)
-//    {
-//        Intent it =new Intent(DispatchActivity.this,LocationActivity.class);
-//        startActivityForResult(it,consumer);
-//    }
-//
-//    public  void clickContel(View v)
-//    {
-//        Intent it =new Intent(DispatchActivity.this,LocationActivity.class);
-//        startActivityForResult(it,contel);
-//    }
-//
-//    public  void clickNote(View v)
-//    {
-//        Intent it =new Intent(DispatchActivity.this,LocationActivity.class);
-//        startActivityForResult(it,note);
-//    }
+    public  void clickConsumer(View v)
+    {
+        Intent it =new Intent(DispatchActivity.this,LocationActivity.class);
+        bconsumer=true;
+        startActivityForResult(it,consumer);
+    }
+
+    public  void clickContel(View v)
+    {
+        Intent it =new Intent(DispatchActivity.this,LocationActivity.class);
+        bcontel=true;
+        startActivityForResult(it,contel);
+    }
+
+    public  void clickNote(View v)
+    {
+        Intent it =new Intent(DispatchActivity.this,LocationActivity.class);
+        bnote=true;
+        startActivityForResult(it,note);
+    }
 
     public void clickSubmit(View v)
     {
