@@ -30,10 +30,24 @@ public class DatepickActivity extends AppCompatActivity {
         int hour=tp.getHour();
         int min =tp.getMinute();
         String gettime = year + "/" + month + "/" + day+" "+hour+":"+min;
-        Intent i=new Intent();
-        i.putExtra("time",gettime);
-        setResult(RESULT_OK,i);
-        finish();
+        if(DispatchActivity.btime)
+        {
+            Intent i=new Intent();
+            i.putExtra("time",gettime);
+            DispatchActivity.btime=false;
+            setResult(RESULT_OK,i);
+            finish();
+        }
+        else if (DispatchActivity.betime)
+        {
+            Intent i=new Intent();
+            i.putExtra("etime",gettime);
+            DispatchActivity.betime=false;
+            setResult(RESULT_OK,i);
+            finish();
+        }
+
+
 
         //        Bundle b=new Bundle();
 //        b.putString("B", "I am B");

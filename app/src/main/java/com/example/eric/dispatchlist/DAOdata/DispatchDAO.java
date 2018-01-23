@@ -1,7 +1,13 @@
 package com.example.eric.dispatchlist.DAOdata;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -23,11 +29,15 @@ public class DispatchDAO
     public ArrayList<Employee> employeeList;
     public ArrayList<DispatchList> dispatchLists;
     public ArrayList<WorkState> workstateList;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
     Context context;
+
 
     public DispatchDAO(String ob)
     {
         this.context=context;
+        database = FirebaseDatabase.getInstance();
         switch (ob)
         {
             case "dispatchLists":
@@ -47,42 +57,62 @@ public class DispatchDAO
 
     public void save()
     {
-        File f =new File(context.getFilesDir(),"dispatchList.txt");
-        FileWriter fw =null;
-        try {
-            fw = new FileWriter(f);
-            Gson gson = new Gson();
-            String data = gson.toJson(dispatchLists);
-            fw.write(data);
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        myRef = database.getReference("dispatchlist");
+
+        Gson gson = new Gson();
+        String data = gson.toJson(dispatchLists);
+
+        myRef.setValue(data);
+
 
     }
 
     public void load()
     {
-        File f =new File(context.getFilesDir(),"dispatchList.txt");
-        FileReader fr = null;
-        try {
-            fr= new FileReader(f);
-            BufferedReader br = new BufferedReader(fr);
-            String str = br.readLine();
-            Gson gson = new Gson();
-            dispatchLists = gson.fromJson(str,new TypeToken<ArrayList<DispatchList>>(){}.getType());
-            br.close();
-            fr.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        myRef = database.getReference("dispatchlist");
+
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+//                Log.d("firebase", "Value is: " + value);
+                Gson gson = new Gson();
+                dispatchLists = gson.fromJson(value,new TypeToken<ArrayList<DispatchList>>(){}.getType());
+                if (dispatchLists == null)
+                {
+                     dispatchLists = new ArrayList<>();
+                }
+
+
+
+                Log.d("data",dispatchLists.toString());
+                for(DispatchList c: dispatchLists)
+                {
+                    Log.d("array",c.id+"時間:"+c.stime+"~"+c.etime+",地點"+c.location);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("firebase", "Failed to read value.", error.toException());
+            }
+        });
+
+
 
     }
 
     public boolean addwork(DispatchList s)
     {
+        if (dispatchLists == null)
+        {
+            dispatchLists = new ArrayList<>();
+        }
         dispatchLists.add(s);
         save();
         return true;

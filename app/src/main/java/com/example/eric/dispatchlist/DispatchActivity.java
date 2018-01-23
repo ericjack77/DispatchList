@@ -18,17 +18,18 @@ import com.example.eric.dispatchlist.DAOdata.Employee;
 import java.util.ArrayList;
 
 public class DispatchActivity extends AppCompatActivity {
-    TextView tvtime,tvlocation,tvdriver,tvapprentice,tvcar,tvconsumer,tvcontel,tvnote;
-    final int time=999,location=998,consumer=997,contel=996,note=995;
+    TextView tvtime,tvlocation,tvdriver,tvapprentice,tvcar,tvconsumer,tvcontel,tvnote,tvid,tvetime;
+    final int time=999,location=998,consumer=997,contel=996,note=995,etime=994;
     int ch,tmp=-1;
     public static DispatchDAO dispatchdao;
-    public static boolean bloc=false,bconsumer=false,bcontel=false,bnote=false;
+    public static boolean bloc=false,bconsumer=false,bcontel=false,bnote=false,btime=false,betime=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dispatch);
         tvtime =findViewById(R.id.tvtime);
+        tvetime =findViewById(R.id.tvetime);
         tvlocation = findViewById(R.id.tvlocation);
         tvdriver = findViewById(R.id.tvdriver);
         tvapprentice =findViewById(R.id.tvapprentice);
@@ -36,8 +37,17 @@ public class DispatchActivity extends AppCompatActivity {
         tvconsumer =findViewById(R.id.tvconsumer);
         tvcontel =findViewById(R.id.tvcontel);
         tvnote = findViewById(R.id.tvnote);
+        tvid = findViewById(R.id.tvid);
+
         dispatchdao = new DispatchDAO("dispatchLists");
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int size = MainActivity.dao.dispatchLists.size()+1;
+        tvid.setText(String.valueOf(size));
     }
 
     @Override
@@ -46,6 +56,9 @@ public class DispatchActivity extends AppCompatActivity {
         switch(requestCode){
             case time:
                 tvtime.setText(data.getStringExtra("time"));
+                break;
+            case etime:
+                tvetime.setText(data.getStringExtra("etime"));
                 break;
             case location:
                 tvlocation.setText(data.getStringExtra("location"));
@@ -199,7 +212,15 @@ public class DispatchActivity extends AppCompatActivity {
     public void clickTime(View v)
     {
         Intent it =new Intent(DispatchActivity.this,DatepickActivity.class);
+        btime=true;
         startActivityForResult(it,time);
+    }
+
+    public void clickeTime(View v)
+    {
+        Intent it =new Intent(DispatchActivity.this,DatepickActivity.class);
+        betime=true;
+        startActivityForResult(it,etime);
     }
 
     public  void clickLocation(View v)
@@ -232,13 +253,35 @@ public class DispatchActivity extends AppCompatActivity {
 
     public void clickSubmit(View v)
     {
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("提交工單");
-        builder.setMessage("確認送出?");
+        builder.setMessage("工單編號:"+Integer.valueOf(tvid.getText().toString())+"\n"
+        +"起訖時間:"+tvtime.getText().toString()+"\n"
+        +"~"+tvetime.getText().toString()+"\n"
+        +"工作地點:"+tvlocation.getText().toString()+"\n"
+        +"客戶:"+tvconsumer.getText().toString()+" "+tvcontel.getText().toString()+"\n"
+        +"出車:"+tvdriver.getText().toString()+"\n"
+        +"隨車司機/助手:"+tvdriver.getText().toString()+"/"+tvapprentice.getText().toString()+"\n"
+        +"備註:"+tvnote.getText().toString()+"\n"
+        +"確認送出?"
+        );
         builder.setPositiveButton("提交", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //以後要在此送出資料去fireBase
+                MainActivity.dao.addwork(new DispatchList(Integer.valueOf(tvid.getText().toString()),
+                        tvtime.getText().toString(),
+                        tvetime.getText().toString(),
+                        tvlocation.getText().toString(),
+                        tvconsumer.getText().toString(),
+                        tvcontel.getText().toString(),
+                        tvdriver.getText().toString(),
+                        tvcar.getText().toString(),
+                        tvapprentice.getText().toString(),
+                        tvnote.getText().toString()));
+                finish();
+
+
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

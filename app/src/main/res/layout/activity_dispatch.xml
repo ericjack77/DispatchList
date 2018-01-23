@@ -66,7 +66,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="clickTime"
-                android:text="時間"
+                android:text="開始時間"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvetime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="clickeTime"
+                android:text="結束時間"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textStyle="bold" />
 
@@ -134,5 +143,22 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="工單編號:"
+        app:layout_constraintEnd_toStartOf="@+id/tvid"
+        app:layout_constraintTop_toTopOf="@+id/tvid" />
+
+    <TextView
+        android:id="@+id/tvid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
