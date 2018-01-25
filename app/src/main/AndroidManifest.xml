@@ -21,9 +21,19 @@
         <activity
             android:name=".EmployerActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".DispatchActivity" />
-        <activity android:name=".DatepickActivity" />
-        <activity android:name=".LocationActivity" />
+        <activity
+            android:name=".DispatchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DatepickActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LocationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EmployeeActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".CheckWorkActivity"></activity>
     </application>
 
 </manifest>

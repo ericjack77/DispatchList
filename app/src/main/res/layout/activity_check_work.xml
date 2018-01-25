@@ -4,36 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.eric.dispatchlist.LocationActivity">
+    tools:context="com.example.eric.dispatchlist.CheckWorkActivity">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButton5"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
-        android:backgroundTint="@android:color/transparent"
-        android:onClick="clickSubmitLocation"
+        android:onClick="clickSubmit"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ccheck" />
+        app:layout_constraintTop_toBottomOf="@+id/listView"
+        app:srcCompat="@drawable/clook" />
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="368dp"
+        android:layout_height="390dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="324dp"
-        android:ems="10"
-        android:hint="輸入地點"
-        android:inputType="textPersonName"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 </android.support.constraint.ConstraintLayout>

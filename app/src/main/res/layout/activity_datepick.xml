@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context="com.example.eric.dispatchlist.DatepickActivity">
 
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:onClick="clickSubmitTime"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ccheck" />
+
     <DatePicker
         android:id="@+id/datePicker"
         android:layout_width="359dp"
@@ -19,19 +32,6 @@
         app:layout_constraintHorizontal_bias="0.133"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="123dp"
-        android:layout_height="108dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@android:color/transparent"
-        android:onClick="clickSubmitTime"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/circlebutton" />
 
     <TimePicker
         android:id="@+id/timePicker"

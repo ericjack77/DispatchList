@@ -3,9 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DispatchList.iml" filepath="$PROJECT_DIR$/.idea/DispatchList.iml" />
-      <module fileurl="file://C:\Users\Student\AndroidStudioProjects\DispatchList\DispatchList.iml" filepath="C:\Users\Student\AndroidStudioProjects\DispatchList\DispatchList.iml" />
-      <module fileurl="file://C:\Users\Eric\StudioProjects\DispatchList\.idea\DispatchList.iml" filepath="C:\Users\Eric\StudioProjects\DispatchList\.idea\DispatchList.iml" />
       <module fileurl="file://C:\Users\Student\AndroidStudioProjects\teacher\DispatchList\DispatchList.iml" filepath="C:\Users\Student\AndroidStudioProjects\teacher\DispatchList\DispatchList.iml" />
+      <module fileurl="file://C:\Users\Student\AndroidStudioProjects\DispatchList\DispatchList.iml" filepath="C:\Users\Student\AndroidStudioProjects\DispatchList\DispatchList.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
