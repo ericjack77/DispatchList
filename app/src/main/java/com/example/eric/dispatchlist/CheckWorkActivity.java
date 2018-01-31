@@ -31,7 +31,7 @@ public class CheckWorkActivity extends AppCompatActivity {
             }
         }
 
-        adapter_checkwork adapter = new adapter_checkwork(CheckWorkActivity.this,filter,cks);
+        adapter_checkwork adapter = new adapter_checkwork(CheckWorkActivity.this,filter);
         lv.setAdapter(adapter);
     }
 

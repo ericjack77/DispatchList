@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.eric.dispatchlist.DAOdata.DispatchList;
 import com.example.eric.dispatchlist.R;
@@ -20,11 +22,11 @@ import java.util.ArrayList;
 public class adapter_checkwork extends BaseAdapter {
     Context context;
     ArrayList<DispatchList> filter = new ArrayList<>();
-    boolean cks[];
-    public adapter_checkwork(Context context,ArrayList<DispatchList> filter , boolean cks[])
+//    boolean cks[];
+    public adapter_checkwork(Context context,ArrayList<DispatchList> filter )
     {
         this.context=context;this.filter=filter;
-        this.cks=cks;
+//        this.cks=cks;
     }
     @Override
     public int getCount() {
@@ -42,7 +44,7 @@ public class adapter_checkwork extends BaseAdapter {
     }
 
     @Override //用getview抓的資料  每次出現在畫面都資料都要重新抓取
-    public View getView(int position, View v1, ViewGroup parent) {
+    public View getView(final int position, View v1, ViewGroup parent) {
         viewholder vh;
         if(v1 == null) //擺設
         {
@@ -94,7 +96,15 @@ public class adapter_checkwork extends BaseAdapter {
         vh.ctvcon.setText(filter.get(position).consumer+"/"+filter.get(position).contel);
         vh.ctvnote.setText(filter.get(position).note);
 
-        //rb 監聽
+        //rb 監聽  http://blog.51cto.com/wy521angel/1570729
+        vh.rb.setOnCheckedChangeListener(null);
+
+        vh.rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Toast.makeText(context, "你選擇的編號"+filter.get(position).id, Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         return v1;
