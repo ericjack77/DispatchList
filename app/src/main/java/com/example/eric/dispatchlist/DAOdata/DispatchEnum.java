@@ -5,5 +5,5 @@ package com.example.eric.dispatchlist.DAOdata;
  */
 
 public enum DispatchEnum {
-    none,sending,admiting,working
+    sending,admiting,working
 }

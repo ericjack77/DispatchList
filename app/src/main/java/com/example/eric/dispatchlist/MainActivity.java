@@ -39,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
     EditText etuser,etpass;
     FirebaseDatabase database;
     DatabaseReference myRef;
-    HashMap<String,String> mapuser,map,map2;
-    //map 帳號對密碼 //map2 帳號對職位 //mapuser 自己的帳號密碼
-    public static HashMap<String,String> map3;
-    //map3 帳號對名字
+    HashMap<String,String> mapuser,map;
+    //map 帳號對密碼  //mapuser 自己的帳號密碼
+    public static HashMap<String,String> map3,map2;
+    //map3 帳號對名字 //map2 帳號對職位
     public static String user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -18,6 +18,7 @@ import com.example.eric.dispatchlist.DAOdata.Employee;
 
 import java.util.ArrayList;
 
+import static com.example.eric.dispatchlist.DAOdata.DispatchEnum.admiting;
 import static com.example.eric.dispatchlist.DAOdata.DispatchEnum.sending;
 
 public class DispatchActivity extends AppCompatActivity {
@@ -272,17 +273,34 @@ public class DispatchActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //以後要在此送出資料去fireBase
-                MainActivity.dao.addwork(new DispatchList(Integer.valueOf(tvid.getText().toString()),
-                        tvtime.getText().toString(),
-                        tvetime.getText().toString(),
-                        tvlocation.getText().toString(),
-                        tvconsumer.getText().toString(),
-                        tvcontel.getText().toString(),
-                        tvdriver.getText().toString(),
-                        tvcar.getText().toString(),
-                        tvapprentice.getText().toString(),
-                        tvnote.getText().toString(),
-                        sending,sending,sending));
+                if (tvdriver.getText().equals("助手"))
+                {
+                    MainActivity.dao.addwork(new DispatchList(Integer.valueOf(tvid.getText().toString()),
+                            tvtime.getText().toString(),
+                            tvetime.getText().toString(),
+                            tvlocation.getText().toString(),
+                            tvconsumer.getText().toString(),
+                            tvcontel.getText().toString(),
+                            tvdriver.getText().toString(),
+                            tvcar.getText().toString(),
+                            tvapprentice.getText().toString(),
+                            tvnote.getText().toString(),
+                            sending,admiting,sending));
+                }
+                else {
+                    MainActivity.dao.addwork(new DispatchList(Integer.valueOf(tvid.getText().toString()),
+                            tvtime.getText().toString(),
+                            tvetime.getText().toString(),
+                            tvlocation.getText().toString(),
+                            tvconsumer.getText().toString(),
+                            tvcontel.getText().toString(),
+                            tvdriver.getText().toString(),
+                            tvcar.getText().toString(),
+                            tvapprentice.getText().toString(),
+                            tvnote.getText().toString(),
+                            sending,sending,sending));
+                }
+
                 finish();
 
 

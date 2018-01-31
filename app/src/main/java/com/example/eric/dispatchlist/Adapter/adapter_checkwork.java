@@ -14,6 +14,7 @@ import com.example.eric.dispatchlist.DAOdata.DispatchList;
 import com.example.eric.dispatchlist.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Eric on 2018/1/25.
@@ -22,11 +23,12 @@ import java.util.ArrayList;
 public class adapter_checkwork extends BaseAdapter {
     Context context;
     ArrayList<DispatchList> filter = new ArrayList<>();
-//    boolean cks[];
-    public adapter_checkwork(Context context,ArrayList<DispatchList> filter)
+    // 用于记录每个RadioButton的状态，并保证只可选一个
+    HashMap<Integer, Boolean> states = new HashMap<Integer, Boolean>();
+    public adapter_checkwork(Context context,ArrayList<DispatchList> filter,HashMap<Integer, Boolean> states)
     {
-        this.context=context;this.filter=filter;
-//        this.cks=cks;
+        this.context=context;this.filter=filter;this.states=states;
+
     }
     @Override
     public int getCount() {
@@ -45,7 +47,7 @@ public class adapter_checkwork extends BaseAdapter {
 
     @Override //用getview抓的資料  每次出現在畫面都資料都要重新抓取
     public View getView(final int position, View v1, ViewGroup parent) {
-        viewholder vh;
+        final viewholder vh;
         if(v1 == null) //擺設
         {
             LayoutInflater inflater = LayoutInflater.from(context);
@@ -96,19 +98,36 @@ public class adapter_checkwork extends BaseAdapter {
         vh.ctvcon.setText(filter.get(position).consumer+"/"+filter.get(position).contel);
         vh.ctvnote.setText(filter.get(position).note);
 
-        //rb 監聽  http://blog.51cto.com/wy521angel/1570729
-        vh.rb.setOnCheckedChangeListener(null);
-
-        vh.rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        //rb 監聽  http://blog.csdn.net/xiaohei5188/article/details/43225525
+        vh.rb.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                Toast.makeText(context, "你選擇的編號"+filter.get(position).id, Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+
+                // 重置，确保最多只有一项被选中
+                for (int key : states.keySet()) {
+                    states.put(key, false);
+                }
+                states.put(position, vh.rb.isChecked());
+                adapter_checkwork.this.notifyDataSetChanged();
             }
         });
+        boolean res = false;
+        if (states.get(position) == null
+                || states.get(position) == false) {
+            res = false;
+            states.put(position, false);
+        } else
+            res = true;
 
-
+        vh.rb.setChecked(res);
         return v1;
+
     }
+
+
+
+
+
 
     static class viewholder
     {

@@ -151,6 +151,36 @@ public class DispatchDAO
         return null;
     }
 
+    public boolean driveradmit(int id)
+    {
+        load();
+        for(DispatchList d:dispatchLists)
+        {
+            if(d.id == id)
+            {
+                d.driverstate = DispatchEnum.admiting;
+                save();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean apprenticeadmit(int id)
+    {
+        load();
+        for(DispatchList d:dispatchLists)
+        {
+            if(d.id == id)
+            {
+                d.aprenticestate = DispatchEnum.admiting;
+                save();
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
 
