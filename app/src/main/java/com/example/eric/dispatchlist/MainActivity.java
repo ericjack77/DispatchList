@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference myRef;
     HashMap<String,String> mapuser,map,map2;
+    //map 帳號對密碼 //map2 帳號對職位 //mapuser 自己的帳號密碼
+    public static HashMap<String,String> map3;
+    //map3 帳號對名字
+    public static String user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,15 +67,11 @@ public class MainActivity extends AppCompatActivity {
                 etpass.setText(value);
             }
 
-
         }
-
 
         dlCar();  //下載 車子資料
         dlEmployee(); //下載  人事資料
         dlDispatch(); //下載 派工資料
-
-
 
     }
 
@@ -82,20 +82,21 @@ public class MainActivity extends AppCompatActivity {
 
         if (dao.employeeList == null)
         {
-             Toast.makeText(this, "系統讀取中,請稍後再按一次", Toast.LENGTH_LONG).show();
+             Toast.makeText(this, "系統讀取中,請稍後再按一次\n或者檢查您的網路連線", Toast.LENGTH_SHORT).show();
         }
         else {
-            map = new HashMap<>();  //抓帳號密碼資料庫
-            map2 = new HashMap<>();
+            map = new HashMap<>();  //抓帳號密碼資料庫 //帳號對密碼
+            map2 = new HashMap<>(); //帳號對職位
 
             for (Employee e:dao.employeeList)
             {
                 map.put(e.username,e.password);
                 Log.d("帳號",e.username+",密碼"+e.password);
                 map2.put(e.username,e.position);
+                map3.put(e.username,e.name);
             }
 
-            String user = etuser.getText().toString();
+            user = etuser.getText().toString();
             String pass=  etpass.getText().toString();
             if (map.containsKey(user) && (map.get(user).equals(pass)) && (map2.get(user).equals("管理"))) //做分流
             {

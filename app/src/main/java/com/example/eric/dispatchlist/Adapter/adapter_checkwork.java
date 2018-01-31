@@ -8,18 +8,27 @@ import android.widget.BaseAdapter;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.example.eric.dispatchlist.DAOdata.DispatchList;
 import com.example.eric.dispatchlist.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by Eric on 2018/1/25.
  */
 
 public class adapter_checkwork extends BaseAdapter {
-        Context context;
-//    public adapter_checkwork(Context context)
+    Context context;
+    ArrayList<DispatchList> filter = new ArrayList<>();
+    boolean cks[];
+    public adapter_checkwork(Context context,ArrayList<DispatchList> filter , boolean cks[])
+    {
+        this.context=context;this.filter=filter;
+        this.cks=cks;
+    }
     @Override
     public int getCount() {
-        return 0;
+        return filter.size();
     }
 
     @Override
@@ -32,10 +41,10 @@ public class adapter_checkwork extends BaseAdapter {
         return 0;
     }
 
-    @Override
+    @Override //用getview抓的資料  每次出現在畫面都資料都要重新抓取
     public View getView(int position, View v1, ViewGroup parent) {
         viewholder vh;
-        if(v1 == null)
+        if(v1 == null) //擺設
         {
             LayoutInflater inflater = LayoutInflater.from(context);
             v1 = inflater.inflate(R.layout.checkworklist,null);
@@ -68,7 +77,21 @@ public class adapter_checkwork extends BaseAdapter {
         {
             vh = (viewholder) v1.getTag();
         }
-        return null;
+
+        //settext
+        vh.ctvid.setText(filter.get(position).id);
+        vh.ctvstime.setText(filter.get(position).stime);
+        vh.ctvetime.setText(filter.get(position).etime);
+        vh.ctvloc.setText(filter.get(position).location);
+        if (filter.get(position).apprentice.equals("助手"))
+        {
+            vh.ctvemp.setText(filter.get(position).driver);
+        }
+        vh.ctvemp.setText(filter.get(position).driver+"/"+filter.get(position).apprentice);
+        vh.ctvcar.setText(filter.get(position).car);
+        vh.ctvcon.setText(filter.get(position).consumer);
+
+        return v1;
     }
 
     static class viewholder
