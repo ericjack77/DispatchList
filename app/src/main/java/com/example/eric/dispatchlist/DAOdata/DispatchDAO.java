@@ -28,7 +28,7 @@ public class DispatchDAO
     public ArrayList<Crane> cranelist;
     public ArrayList<Employee> employeeList;
     public ArrayList<DispatchList> dispatchLists;
-    public ArrayList<WorkState> workstateList;
+
     FirebaseDatabase database;
     DatabaseReference myRef;
     Context context;
@@ -42,9 +42,6 @@ public class DispatchDAO
         {
             case "dispatchLists":
                 dispatchLists = new ArrayList<>();
-                break;
-            case "workstateList":
-                workstateList = new ArrayList<>();
                 break;
             case "Crane":
                 cranelist = new ArrayList<>();

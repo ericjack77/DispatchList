@@ -16,9 +16,18 @@ public class DispatchList
     public String car;       //from Crane.name
     public String apprentice; //from Employee.name
     public String note;
-    public DispatchList(int id,String stime,String etime,String location,String consumer,String contel,String driver,String car,String apprentice,String note)
+    public DispatchEnum driverstate;
+    public DispatchEnum aprenticestate;
+    public DispatchEnum carstate;
+    public DispatchList(int id,String stime,String etime,String location,
+                        String consumer,String contel,String driver,String car,
+                        String apprentice,String note,DispatchEnum driverstate,
+                        DispatchEnum aprenticestate,DispatchEnum carstate)
     {
-        this.id=id;this.stime=stime;this.etime=etime;this.location=location;this.consumer=consumer;this.contel=contel;this.driver=driver;this.car=car;this.apprentice=apprentice;this.note=note;
+        this.id=id;this.stime=stime;this.etime=etime;this.location=location;
+        this.consumer=consumer;this.contel=contel;this.driver=driver;this.car=car;
+        this.apprentice=apprentice;this.note=note;
+        this.driverstate=driverstate;this.aprenticestate=aprenticestate;this.carstate=carstate;
 
     }
 

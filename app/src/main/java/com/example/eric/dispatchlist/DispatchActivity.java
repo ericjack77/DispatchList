@@ -12,10 +12,13 @@ import android.widget.TextView;
 
 import com.example.eric.dispatchlist.DAOdata.Crane;
 import com.example.eric.dispatchlist.DAOdata.DispatchDAO;
+import com.example.eric.dispatchlist.DAOdata.DispatchEnum;
 import com.example.eric.dispatchlist.DAOdata.DispatchList;
 import com.example.eric.dispatchlist.DAOdata.Employee;
 
 import java.util.ArrayList;
+
+import static com.example.eric.dispatchlist.DAOdata.DispatchEnum.sending;
 
 public class DispatchActivity extends AppCompatActivity {
     TextView tvtime,tvlocation,tvdriver,tvapprentice,tvcar,tvconsumer,tvcontel,tvnote,tvid,tvetime;
@@ -278,7 +281,8 @@ public class DispatchActivity extends AppCompatActivity {
                         tvdriver.getText().toString(),
                         tvcar.getText().toString(),
                         tvapprentice.getText().toString(),
-                        tvnote.getText().toString()));
+                        tvnote.getText().toString(),
+                        sending,sending,sending));
                 finish();
 
 
