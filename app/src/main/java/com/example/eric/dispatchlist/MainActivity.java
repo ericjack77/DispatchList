@@ -87,12 +87,13 @@ public class MainActivity extends AppCompatActivity {
         else {
             map = new HashMap<>();  //抓帳號密碼資料庫 //帳號對密碼
             map2 = new HashMap<>(); //帳號對職位
-
+            map3 = new HashMap<>(); //帳號對名字
             for (Employee e:dao.employeeList)
             {
                 map.put(e.username,e.password);
-                Log.d("帳號",e.username+",密碼"+e.password);
+                Log.d("帳號",e.username+",密碼"+e.password+",名字"+e.name);
                 map2.put(e.username,e.position);
+
                 map3.put(e.username,e.name);
             }
 
