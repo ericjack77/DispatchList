@@ -87,9 +87,15 @@ public class adapter_checkwork extends BaseAdapter {
         {
             vh.ctvemp.setText(filter.get(position).driver);
         }
-        vh.ctvemp.setText(filter.get(position).driver+"/"+filter.get(position).apprentice);
+        else {
+            vh.ctvemp.setText(filter.get(position).driver+"/"+filter.get(position).apprentice);
+        }
         vh.ctvcar.setText(filter.get(position).car);
-        vh.ctvcon.setText(filter.get(position).consumer);
+        vh.ctvcon.setText(filter.get(position).consumer+"/"+filter.get(position).contel);
+        vh.ctvnote.setText(filter.get(position).note);
+
+        //rb 監聽
+
 
         return v1;
     }
