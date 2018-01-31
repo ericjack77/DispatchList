@@ -23,7 +23,7 @@ public class adapter_checkwork extends BaseAdapter {
     Context context;
     ArrayList<DispatchList> filter = new ArrayList<>();
 //    boolean cks[];
-    public adapter_checkwork(Context context,ArrayList<DispatchList> filter )
+    public adapter_checkwork(Context context,ArrayList<DispatchList> filter)
     {
         this.context=context;this.filter=filter;
 //        this.cks=cks;
@@ -81,7 +81,7 @@ public class adapter_checkwork extends BaseAdapter {
         }
 
         //settext
-        vh.ctvid.setText(filter.get(position).id);
+        vh.ctvid.setText(String.valueOf(filter.get(position).id));
         vh.ctvstime.setText(filter.get(position).stime);
         vh.ctvetime.setText(filter.get(position).etime);
         vh.ctvloc.setText(filter.get(position).location);

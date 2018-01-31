@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -32,7 +33,10 @@ public class CheckWorkActivity extends AppCompatActivity {
         }
 
         adapter_checkwork adapter = new adapter_checkwork(CheckWorkActivity.this,filter);
-        lv.setAdapter(adapter);
+        lv.setAdapter(adapter);// 根据RadioButton的选择情况
+        lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);//如果不使用这个设置，选项中的radiobutton无法响应选中事件
+        // http://blog.csdn.net/xiaohei5188/article/details/43225525
+
     }
 
     public void clickcheck(View v)
