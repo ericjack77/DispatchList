@@ -1,16 +1,19 @@
 package com.example.eric.dispatchlist;
 
+import android.content.DialogInterface;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -43,7 +46,7 @@ public class PresentActivity extends AppCompatActivity{
         setContentView(R.layout.activity_present);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -91,21 +94,26 @@ public class PresentActivity extends AppCompatActivity{
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 //            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 //            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
 //這裡做已簽收的ListView Adapter
-            ListView lv =rootView.findViewById(R.id.listView);
+            ListView lv =rootView.findViewById(R.id.frg_listview);
             ArrayList<String> admitted = new ArrayList<>();
-            ArrayList<String> notyet = new ArrayList<>();for (DispatchList d:MainActivity.dao.dispatchLists)
+            final ArrayList<Integer> admittedid = new ArrayList<>();
+            ArrayList<String> notyet = new ArrayList<>();
+            final ArrayList<Integer> notyetid = new ArrayList<>();
+            for (DispatchList d:MainActivity.dao.dispatchLists)
             {
                 if (d.driverstate == DispatchEnum.admiting && d.aprenticestate == DispatchEnum.admiting)
                 {
                     admitted.add("地點:"+d.location+"人員:"+d.driver+"/"+d.apprentice);
+                    admittedid.add(d.id);
                 }
                 else
                 {
                     notyet.add("地點:"+d.location+"人員:"+d.driver+"/"+d.apprentice);
+                    notyetid.add(d.id);
                 }
             }
 
@@ -114,8 +122,59 @@ public class PresentActivity extends AppCompatActivity{
                 case 1:
                     ArrayAdapter adapter = new ArrayAdapter(rootView.getContext(),
                             android.R.layout.simple_list_item_1,admitted);
+                    lv.setAdapter(adapter);
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(rootView.getContext());
+                            builder.setTitle("查看詳細資料");
+                            builder.setMessage("工單編號:"+MainActivity.dao.get(admittedid.get(i)).id+"\n"
+                                    +"起訖時間:"+MainActivity.dao.get(admittedid.get(i)).stime+"\n"
+                                    +"~"+MainActivity.dao.get(admittedid.get(i)).etime+"\n"
+                                    +"工作地點:"+MainActivity.dao.get(admittedid.get(i)).location+"\n"
+                                    +"客戶:"+MainActivity.dao.get(admittedid.get(i)).consumer+" "+MainActivity.dao.get(admittedid.get(i)).contel+"\n"
+                                    +"出車:"+MainActivity.dao.get(admittedid.get(i)).car+"\n"
+                                    +"隨車司機/助手:"+MainActivity.dao.get(admittedid.get(i)).driver+"/"+MainActivity.dao.get(admittedid.get(i)).apprentice+"\n"
+                                    +"備註:"+MainActivity.dao.get(admittedid.get(i)).note+"\n"
+                                    );
+                            builder.setPositiveButton("關閉", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+                            builder.show();
+                        }
+                    });
                     break;
                 case 2:
+                    ArrayAdapter adapter2 = new ArrayAdapter(rootView.getContext(),
+                            android.R.layout.simple_list_item_1,notyet);
+                    lv.setAdapter(adapter2);
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(rootView.getContext());
+                            builder.setTitle("查看詳細資料");
+                            builder.setMessage("工單編號:"+MainActivity.dao.get(notyetid.get(i)).id+"\n"
+                                    +"起訖時間:"+MainActivity.dao.get(notyetid.get(i)).stime+"\n"
+                                    +"~"+MainActivity.dao.get(notyetid.get(i)).etime+"\n"
+                                    +"工作地點:"+MainActivity.dao.get(notyetid.get(i)).location+"\n"
+                                    +"客戶:"+MainActivity.dao.get(notyetid.get(i)).consumer+" "+MainActivity.dao.get(notyetid.get(i)).contel+"\n"
+                                    +"出車:"+MainActivity.dao.get(notyetid.get(i)).car+"\n"
+                                    +"隨車司機/狀態:"+MainActivity.dao.get(notyetid.get(i)).driver+MainActivity.dao.get(notyetid.get(i)).driverstate+"\n"
+                                    +"隨車助手/狀態:"+MainActivity.dao.get(notyetid.get(i)).apprentice+MainActivity.dao.get(notyetid.get(i)).aprenticestate+"\n"
+                                    +"備註:"+MainActivity.dao.get(notyetid.get(i)).note+"\n"
+                            );
+                            builder.setPositiveButton("關閉", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+                            builder.show();
+                        }
+                    });
                     break;
             }
 
