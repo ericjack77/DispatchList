@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance(); //建立連結
         loadFile(); //下載 自己的帳號密碼資料
-        if (mapuser.isEmpty() == false)
+        if (mapuser.isEmpty() == false) //如果裡面有資料 抓出來自動填寫帳號密碼
         {
             for(String key : mapuser.keySet()){
                 String value = mapuser.get(key);
@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
                 map.put(e.username,e.password);
                 Log.d("帳號",e.username+",密碼"+e.password+",名字"+e.name);
                 map2.put(e.username,e.position);
-
                 map3.put(e.username,e.name);
             }
 
@@ -221,22 +220,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public  void savaFile()
-    {
-        mapuser.clear();
-        mapuser.put(etuser.getText().toString(),etpass.getText().toString());
-        File f =new File(getFilesDir(),"user.txt");
-        FileWriter fw =null;
-        try {
-            fw = new FileWriter(f);
-            Gson gson = new Gson();
-            String data = gson.toJson(mapuser);
-            fw.write(data);
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        public  void savaFile()
+        {
+            mapuser.clear();
+            mapuser.put(etuser.getText().toString(),etpass.getText().toString());
+            File f =new File(getFilesDir(),"user.txt");
+            FileWriter fw =null;
+            try {
+                fw = new FileWriter(f);
+                Gson gson = new Gson();
+                String data = gson.toJson(mapuser);
+                fw.write(data);
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-    }
 
     public void loadFile()
     {
