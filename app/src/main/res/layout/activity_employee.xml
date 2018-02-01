@@ -27,6 +27,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
+        android:onClick="clickgopresent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/csofar" />

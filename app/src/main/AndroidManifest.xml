@@ -33,8 +33,10 @@
         <activity
             android:name=".EmployeeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".CheckWorkActivity"
-            android:screenOrientation="portrait" ></activity>
+        <activity
+            android:name=".CheckWorkActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PresentActivity"></activity>
     </application>
 
 </manifest>

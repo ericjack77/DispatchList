@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DispatchList</string>
+    <string name="notyet">未簽收</string>
+    <string name="admitted">已簽收</string>
 </resources>

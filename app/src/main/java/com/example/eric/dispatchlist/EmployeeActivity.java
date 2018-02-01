@@ -18,4 +18,10 @@ public class EmployeeActivity extends AppCompatActivity {
         Intent in = new Intent(EmployeeActivity.this,CheckWorkActivity.class);
         startActivity(in);
     }
+
+    public void clickgopresent(View v)
+    {
+        Intent in = new Intent(this,PresentActivity.class);
+        startActivity(in);
+    }
 }

@@ -21,4 +21,10 @@ public class EmployerActivity extends AppCompatActivity {
         Intent it =new Intent(EmployerActivity.this,DispatchActivity.class);
         startActivity(it);
     }
+
+    public void clickgopresent(View v)
+    {
+        Intent in = new Intent(this,PresentActivity.class);
+        startActivity(in);
+    }
 }
