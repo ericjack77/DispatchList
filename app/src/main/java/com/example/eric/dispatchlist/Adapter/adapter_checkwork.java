@@ -28,7 +28,6 @@ public class adapter_checkwork extends BaseAdapter {
     public adapter_checkwork(Context context,ArrayList<DispatchList> filter,HashMap<Integer, Boolean> states)
     {
         this.context=context;this.filter=filter;this.states=states;
-
     }
     @Override
     public int getCount() {
