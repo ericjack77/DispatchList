@@ -44,14 +44,14 @@ public class DispatchActivity extends AppCompatActivity {
         tvid = findViewById(R.id.tvid);
 
         dispatchdao = new DispatchDAO("dispatchLists");
-
+        int size = MainActivity.dao.dispatchLists.size()+1;
+        tvid.setText(String.valueOf(size));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        int size = MainActivity.dao.dispatchLists.size()+1;
-        tvid.setText(String.valueOf(size));
+
     }
 
     @Override
