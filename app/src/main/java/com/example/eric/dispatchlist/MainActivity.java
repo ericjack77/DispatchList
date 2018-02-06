@@ -15,6 +15,7 @@ import com.example.eric.dispatchlist.DAOdata.Crane;
 import com.example.eric.dispatchlist.DAOdata.DispatchDAO;
 import com.example.eric.dispatchlist.DAOdata.DispatchList;
 import com.example.eric.dispatchlist.DAOdata.Employee;
+import com.example.eric.dispatchlist.FCM.MyInstanceidService;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public static HashMap<String,String> map3,map2;
     //map3 帳號對名字 //map2 帳號對職位
     public static String user;
+    MyInstanceidService instanceid ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,12 +102,14 @@ public class MainActivity extends AppCompatActivity {
             String pass=  etpass.getText().toString();
             if (map.containsKey(user) && (map.get(user).equals(pass)) && (map2.get(user).equals("管理"))) //做分流
             {
+                instanceid.onTokenRefresh();
                 savaFile();
                 Intent it =new Intent(MainActivity.this,EmployerActivity.class);
                 startActivity(it);
             }
             else if (map.containsKey(user) && (map.get(user).equals(pass)) && (map2.get(user).equals("司機") || map2.get(user).equals("助手")))
             {
+                instanceid.onTokenRefresh();
                 savaFile();
                 Intent it =new Intent(MainActivity.this,EmployeeActivity.class);
                 startActivity(it);
