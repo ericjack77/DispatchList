@@ -102,14 +102,14 @@ public class MainActivity extends AppCompatActivity {
             String pass=  etpass.getText().toString();
             if (map.containsKey(user) && (map.get(user).equals(pass)) && (map2.get(user).equals("管理"))) //做分流
             {
-                instanceid.onTokenRefresh();
+//                instanceid.onTokenRefresh();
                 savaFile();
                 Intent it =new Intent(MainActivity.this,EmployerActivity.class);
                 startActivity(it);
             }
             else if (map.containsKey(user) && (map.get(user).equals(pass)) && (map2.get(user).equals("司機") || map2.get(user).equals("助手")))
             {
-                instanceid.onTokenRefresh();
+//                instanceid.onTokenRefresh();
                 savaFile();
                 Intent it =new Intent(MainActivity.this,EmployeeActivity.class);
                 startActivity(it);
